@@ -40,9 +40,14 @@ export class WeatherService {
       city: data.name,
       country: data.sys.country,
       date: new Date(data.dt * 1000),
-      image: `http://openweathermap.org/img/w/${data.weather[0]}.png`,
-      temperature: data.main.temp,
+      image: `http://openweathermap.org/img/w/${data.weather[0].icon}.png`,
+      temperature: this.convertKelvinToFahrenheit(data.main.temp),
       description: data.weather[0].description
     }
   }
+
+  convertKelvinToFahrenheit(kelvin: number): number{
+    return kelvin * 9 / 5 - 459.67
+  }
+
 }
